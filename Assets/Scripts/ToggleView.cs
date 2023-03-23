@@ -6,7 +6,8 @@ public class ToggleView : MonoBehaviour
 {
     public GameObject referenceObject;
 
-    private void OnMouseDown()
+    /*
+    public void OnMouseDown()
     {
         if (referenceObject.activeSelf == true)
         {
@@ -17,6 +18,18 @@ public class ToggleView : MonoBehaviour
             referenceObject.SetActive(true);
         }
 
+    }
+    */
+    public void SwapView() 
+    {
+        if (referenceObject.activeSelf == true)
+        {
+            referenceObject.SetActive(false);
+        }
+        else
+        {
+            referenceObject.SetActive(true);
+        }
     }
 
 }

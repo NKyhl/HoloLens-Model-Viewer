@@ -8,7 +8,7 @@ public class ToggleScale : MonoBehaviour
     public GameObject referenceObject;
     private bool scaledUp = false;
 
-    private void OnMouseDown()
+    public void SwapScale()
     {
         if (referenceObject.activeSelf == false)
             return;
