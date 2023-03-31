@@ -24,5 +24,6 @@ public class BrightnessSlider : MonoBehaviour
     public void ResetLight()
     {
         referenceLight.GetComponent<Light>().intensity = baseline;
+        slider.GetComponent<PinchSlider>().SliderValue = baseline;
     }
 }

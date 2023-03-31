@@ -11,7 +11,7 @@ public class ScaleSlider : MonoBehaviour
     private float value;
     private Vector3 baseline;
 
-    private void Start() 
+    private void Awake() 
     {
         baseline = referenceObject.transform.localScale;
     }
@@ -24,14 +24,12 @@ public class ScaleSlider : MonoBehaviour
         value = slider.GetComponent<PinchSlider>().SliderValue * 2;
         if (value > 0.05)
             referenceObject.transform.localScale = baseline * value;
-
-        Debug.Log(referenceObject.transform.localScale);
-
     }
 
     public void ResetScale() 
     {
         referenceObject.transform.localScale = baseline;
+        slider.GetComponent<PinchSlider>().SliderValue = baseline.x / 2;
     }
 
 }
