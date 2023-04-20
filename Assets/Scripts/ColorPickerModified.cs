@@ -26,6 +26,9 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
         [Tooltip("Any mesh within the ColorPicker UI that receives color changes")]
         private MeshRenderer[] PickerUIMeshes = null;
         [SerializeField]
+        [Tooltip("Any sprite within the ColorPicker UI that receives color changes")]
+        private SpriteRenderer[] PickerUISprites = null;
+        [SerializeField]
         [Tooltip("The gradient mesh that receives touch input")]
         private MeshRenderer GradientMesh = null;
         [SerializeField]
@@ -52,9 +55,6 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
         [SerializeField]
         [Tooltip("A pinch slider used for brightness")]
         private PinchSlider SliderBrightness = null;
-        [SerializeField]
-        [Tooltip("A pinch slider used for metallic")]
-        private PinchSlider SliderMetallic = null;
         [SerializeField]
         [Tooltip("A pinch slider used for smoothness")]
         private PinchSlider SliderSmoothness = null;
@@ -84,9 +84,6 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
         [Tooltip("The text value of the color's brightness property")]
         private TextMeshPro TextBrightness = null;
         [SerializeField]
-        [Tooltip("The text value of the color's metallic property")]
-        private TextMeshPro TextMetallic = null;
-        [SerializeField]
         [Tooltip("The text value of the color's smoothness property")]
         private TextMeshPro TextSmoothness = null;
         //
@@ -97,7 +94,6 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
         private Color CustomColor;
         private float Hue, Saturation, Brightness, Alpha = 0.3f;
         //
-        private float Metallic;
         private float Smoothness;
         //
         private bool IsDraggingSliders = false;
@@ -227,8 +223,7 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
                 ExtractColorFromMaterial(TargetObjectMesh);
 
                 targetObjectTexture = GameObject.Find(container.name).GetComponent<Renderer>().sharedMaterial;
-                Metallic = targetObjectTexture.GetFloat("_Metallic");
-                Smoothness = targetObjectTexture.GetFloat("_Glossiness");
+                Smoothness = targetObjectTexture.GetFloat("_GlossMapScale");
             } else {
                 this.gameObject.SetActive(false);
             }
@@ -269,13 +264,12 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
             }
         }
         /// <summary>
-        /// Applies Metallic and Smoothness slider values to the Metallic and Smoothness sliders
+        /// Applies Smoothness slider values to the Smoothness slider
         /// </summary>
         public void UpdateColorMS()
         {
             if (IsDraggingSliders == true)
             {
-                Metallic = SliderMetallic.SliderValue;
                 Smoothness = SliderSmoothness.SliderValue;
                 //
                 UpdateSliderText();
@@ -330,7 +324,6 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
             TextSaturation.text = Mathf.Clamp(Mathf.RoundToInt(Saturation * 100), 0, 100) + "%";
             TextBrightness.text = Mathf.Clamp(Mathf.RoundToInt(Brightness * 100), 0, 100) + "%";
             //
-            TextMetallic.text = Mathf.Clamp(Mathf.RoundToInt(Metallic * 100), 0, 100) + "%";
             TextSmoothness.text = Mathf.Clamp(Mathf.RoundToInt(Smoothness * 100), 0, 100) + "%";
         }
         private void ApplyColor()
@@ -350,13 +343,24 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
                     rend.material.color = CustomColor;
                 }
             }
+            foreach (SpriteRenderer rend in PickerUISprites)
+            {
+                if (rend != null)
+                {
+                    rend.color = CustomColor;
+                    if (rend.name == "Dragger")
+                    {
+                        // don't fade the alpha of the dragger object
+                        rend.color = new Color(CustomColor.r, CustomColor.g, CustomColor.b, 1);
+                    }
+                }
+            }
         }
         private void ApplyMaterial()
         {
             if (TargetObjectMesh != null && TargetObjectMesh.material != null)
             {
-                targetObjectTexture.SetFloat("_Metallic", Metallic);
-                targetObjectTexture.SetFloat("_Glossiness", Smoothness);
+                targetObjectTexture.SetFloat("_GlossMapScale", Smoothness);
             }
         }
         private void ApplySliderValues()
@@ -368,7 +372,6 @@ namespace Microsoft.MixedReality.Toolkit.Experimental.ColorPicker
             SliderHue.SliderValue = Mathf.Clamp(Hue, 0, 1);
             SliderSaturation.SliderValue = Mathf.Clamp(Saturation, 0, 1);
             SliderBrightness.SliderValue = Mathf.Clamp(Brightness, 0, 1);
-            SliderMetallic.SliderValue = Mathf.Clamp(Metallic, 0, 1);
             SliderSmoothness.SliderValue = Mathf.Clamp(Smoothness, 0, 1);
         }
         #endregion
