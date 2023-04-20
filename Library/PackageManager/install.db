@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "packages": {
+    "com.microsoft.mixedreality.openxr": {
+      "tarball": {
+        "hash": "dfc0305df3e4",
+        "mtime": 1681411865295,
+        "size": 9382536,
+        "localPath": "C:\\Users\\nkyhl\\MRTKChangeCube\\Packages\\MixedReality\\com.microsoft.mixedreality.openxr-1.8.0.tgz"
+      }
+    }
+  }
+}
