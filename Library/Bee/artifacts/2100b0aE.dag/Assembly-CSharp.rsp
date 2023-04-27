@@ -417,6 +417,7 @@
 -r:"Library/Bee/artifacts/2100b0aE.dag/UnityEngine.XR.LegacyInputHelpers.ref.dll"
 "Assets/Scripts/BrightnessSlider.cs"
 "Assets/Scripts/ColorPickerModified.cs"
+"Assets/Scripts/DownloadAssetBundles.cs"
 "Assets/Scripts/ScaleSlider.cs"
 "Assets/Scripts/ToggleColor.cs"
 "Assets/Scripts/ToggleLight.cs"
