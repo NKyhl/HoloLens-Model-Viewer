@@ -566,11 +566,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: ChangeCube
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 008e2c995f98da01
   metroApplicationDescription: ModelViewer
   wsaImages: {}
   metroTileShortName: ChangeCube

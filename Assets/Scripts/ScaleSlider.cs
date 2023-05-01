@@ -6,7 +6,7 @@ using Microsoft.MixedReality.Toolkit.UI;
 
 public class ScaleSlider : MonoBehaviour 
 {
-    // This script controls the functionality of the ScaleSlider, and is applied to the ScaleManipulator helper object under NearMenu
+    // This script controls the functionality of the ScaleSlider, and is applied to the ScaleManipulator helper object under UI -> Main Menu
     public GameObject slider;
     public GameObject referenceObject;
     private float value;
