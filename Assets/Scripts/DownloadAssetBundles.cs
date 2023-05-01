@@ -12,10 +12,12 @@ public class DownloadAssetBundles : MonoBehaviour
     public GameObject defaultGo;
     Vector3 position;
     Vector3 scale;
+    Vector3 defaultPosition;
 
     private void Start()
     {
         position = defaultGo.transform.position;
+        defaultPosition = defaultGo.transform.position;
         scale = defaultGo.transform.localScale;
     }
     public void StartAssetBundleDownload()
@@ -53,6 +55,10 @@ public class DownloadAssetBundles : MonoBehaviour
         {
             position = instanceGo.transform.position;
         }
+        else if (defaultGo)
+        {
+            position = defaultGo.transform.position;
+        }
 
         // Check if Asset is valid
         if (go == null)
@@ -86,5 +92,17 @@ public class DownloadAssetBundles : MonoBehaviour
         defaultGo.transform.position = position;
         defaultGo.transform.localScale = scale;
         defaultGo.SetActive(true);
+    }
+
+    public void ResetPosition()
+    { // Currently unused, but in case a position reset button is added.
+        if (instanceGo)
+        {
+            instanceGo.transform.position = defaultPosition;
+        }
+        else
+        {
+            defaultGo.transform.position = defaultPosition;
+        }
     }
 }

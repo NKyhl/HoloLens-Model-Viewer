@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ToggleView : MonoBehaviour
 {
+    // This script is used by the HideShow Button under UI -> ButtonCollection -> HideShowButton
     public GameObject referenceObject;
     public void SwapView() 
     {
